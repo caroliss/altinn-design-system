@@ -23,6 +23,9 @@ export interface TabsProps {
 
 const validId = (str: string) => str.replace(/\s/, '_');
 
+/**
+ * @deprecated Use Tabs from @digdir/design-system-react instead.
+ */
 export const Tabs = ({ activeTab, items, onChange }: TabsProps) => {
   const idBase = useId();
 
@@ -94,17 +97,17 @@ export const Tabs = ({ activeTab, items, onChange }: TabsProps) => {
     };
 
   return (
-    <div className={classes.tabs}>
+    <div className={classes['altinn-tabs']}>
       <div
-        className={classes['tabs__tablist']}
+        className={classes['altinn-tabs__tablist']}
         ref={tablistRef}
         role='tablist'
       >
         {tabs.map((tab, i) => {
           const isSelected = tab.value === visiblePanel;
           const className = cn(
-            classes['tabs__tablist__tab'],
-            isSelected && classes['tabs__tablist__tab--selected'],
+            classes['altinn-tabs__tablist__tab'],
+            isSelected && classes['altinn-tabs__tablist__tab--selected'],
           );
           return (
             <button
@@ -123,10 +126,10 @@ export const Tabs = ({ activeTab, items, onChange }: TabsProps) => {
           );
         })}
       </div>
-      <hr className={classes['tabs__divider']} />
+      <hr className={classes['altinn-tabs__divider']} />
       {tabs.map((tab) => (
         <div
-          className={classes['tabs__tabpanel']}
+          className={classes['altinn-tabs__tabpanel']}
           aria-labelledby={tab.tabId}
           hidden={tab.value !== visiblePanel}
           id={tab.panelId}

@@ -1,4 +1,4 @@
-import type { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, ReactNode } from 'react';
 import React from 'react';
 import cn from 'classnames';
 
@@ -13,16 +13,20 @@ export interface CheckboxProps {
   checkboxId?: string;
   checked?: boolean;
   compact?: boolean;
-  description?: string;
+  description?: ReactNode;
   disabled?: boolean;
   error?: boolean;
   hideLabel?: boolean;
-  label?: string;
+  label?: ReactNode;
   name?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  presentation?: boolean;
   readOnly?: boolean;
 }
 
+/**
+ * @deprecated Use Checkbox from @digdir/design-system-react instead.
+ */
 export const Checkbox = ({
   checkboxId,
   checked,
@@ -34,17 +38,18 @@ export const Checkbox = ({
   label,
   name,
   onChange,
+  presentation,
   readOnly,
 }: CheckboxProps) => (
   <CheckboxRadioTemplate
     checked={checked}
     className={cn(
-      classes.checkbox,
-      checked && classes['checkbox--checked'],
-      error && classes['checkbox--error'],
-      disabled && classes['checkbox--disabled'],
-      compact && classes['checkbox--compact'],
-      readOnly && classes['checkbox--read-only'],
+      classes['altinn-checkbox'],
+      checked && classes['altinn-checkbox--checked'],
+      error && classes['altinn-checkbox--error'],
+      disabled && classes['altinn-checkbox--disabled'],
+      compact && classes['altinn-checkbox--compact'],
+      readOnly && classes['altinn-checkbox--read-only'],
     )}
     description={description}
     disabled={disabled}
@@ -54,6 +59,7 @@ export const Checkbox = ({
     label={label}
     name={name}
     onChange={onChange}
+    presentation={presentation}
     size={
       compact
         ? CheckboxRadioTemplateSize.Xsmall
@@ -61,8 +67,8 @@ export const Checkbox = ({
     }
     type='checkbox'
   >
-    <span className={classes['visible-box']}>
-      <span className={classes['visible-box__checkmark']} />
+    <span className={classes['altinn-visible-box']}>
+      <span className={classes['altinn-visible-box__checkmark']} />
     </span>
   </CheckboxRadioTemplate>
 );

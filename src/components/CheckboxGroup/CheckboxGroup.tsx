@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import React, { useEffect, useReducer } from 'react';
 import cn from 'classnames';
 
@@ -25,12 +26,13 @@ export type CheckedNames = string[];
 
 export interface CheckboxGroupProps {
   compact?: boolean;
-  description?: string;
+  description?: ReactNode;
   disabled?: boolean;
-  error?: React.ReactNode;
+  error?: ReactNode;
   items: CheckboxItem[];
-  legend?: string;
+  legend?: ReactNode;
   onChange?: (names: CheckedNames) => void;
+  presentation?: boolean;
   variant?: CheckboxGroupVariant;
 }
 
@@ -51,6 +53,9 @@ const reducer = (state: CheckedNames, action: ReducerAction) => {
 const checkedItems = (items: CheckboxItem[]) =>
   items.filter(({ checked }) => checked).map(({ name }) => name);
 
+/**
+ * @deprecated Use CheckboxGroup from @digdir/design-system-react instead.
+ */
 export const CheckboxGroup = ({
   compact,
   description,
@@ -59,6 +64,7 @@ export const CheckboxGroup = ({
   items,
   legend,
   onChange,
+  presentation,
   variant = CheckboxGroupVariant.Vertical,
 }: CheckboxGroupProps) => {
   if (!areItemsUnique(items.map((item) => item.name))) {
@@ -91,9 +97,9 @@ export const CheckboxGroup = ({
     >
       <div
         className={cn(
-          classes['checkbox-group'],
-          classes[`checkbox-group--${variant}`],
-          compact && classes['checkbox-group--compact'],
+          classes['altinn-checkbox-group'],
+          classes[`altinn-checkbox-group--${variant}`],
+          compact && classes['altinn-checkbox-group--compact'],
         )}
       >
         {items.map((item) => (
@@ -113,6 +119,7 @@ export const CheckboxGroup = ({
                 name: item.name,
               });
             }}
+            presentation={presentation}
           />
         ))}
       </div>

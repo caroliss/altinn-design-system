@@ -10,14 +10,14 @@ export {
   AccordionIcon,
 } from './Accordion';
 export { Button, ButtonVariant, ButtonColor, ButtonSize } from './Button';
-export { Page, PageHeader, PageContent, PageColor } from './Page';
+export { Page, PageHeader, PageContent, PageColor, PageSize } from './Page';
 export { List, ListItem, BorderStyle } from './List';
 export { TextField } from './TextField';
 export { SearchField } from './SearchField';
 export { ErrorMessage } from './ErrorMessage';
 export type { Location, MapLayer } from './Map';
 export { Map } from './Map';
-export type { ChangeProps, SortProps, RowData } from './Table';
+export type { ChangeProps, SortProps, ResponsiveTableConfig } from './Table';
 export {
   Table,
   TableBody,
@@ -26,6 +26,7 @@ export {
   TableRow,
   TableFooter,
   SortDirection,
+  ResponsiveTable,
 } from './Table';
 export { Checkbox } from './Checkbox';
 export { TextArea } from './TextArea';

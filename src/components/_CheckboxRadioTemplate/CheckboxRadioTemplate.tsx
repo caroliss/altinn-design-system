@@ -1,4 +1,4 @@
-/*
+/**
  * This is an internal component used for the Checkbox and RadioButton components,
  * as they have several similarities.
  */
@@ -18,15 +18,16 @@ export interface CheckboxRadioTemplateProps {
   checked?: boolean;
   children: ReactNode;
   className?: string;
-  description?: string;
+  description?: ReactNode;
   disabled?: boolean;
   hideInput?: boolean;
   hideLabel?: boolean;
   inputId?: string;
   inputWrapperClassName?: string;
-  label?: string;
+  label?: ReactNode;
   name?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  presentation?: boolean;
   size: CheckboxRadioTemplateSize;
   type: 'checkbox' | 'radio';
   value?: string;
@@ -44,6 +45,7 @@ export const CheckboxRadioTemplate = ({
   label,
   name,
   onChange,
+  presentation,
   size,
   type,
   value,
@@ -57,38 +59,45 @@ export const CheckboxRadioTemplate = ({
   return (
     <label
       className={cn(
-        classes.template,
-        classes[`template--${size}`],
-        disabled && classes['template--disabled'],
+        classes['altinn-template'],
+        classes[`altinn-template--${size}`],
+        disabled && classes['altinn-template--disabled'],
         className,
       )}
       htmlFor={inputId}
     >
       {!hideInput && (
-        <span className={classes['template__input-wrapper']}>
+        <span className={classes['altinn-template__input-wrapper']}>
           <input
             aria-describedby={descriptionId}
-            aria-label={!showLabel ? label : undefined}
+            aria-label={
+              !showLabel && typeof label === 'string' ? label : undefined
+            }
             aria-labelledby={showLabel ? labelId : undefined}
             checked={checked ?? false}
-            className={classes['template__input-wrapper__input']}
+            className={classes['altinn-template__input-wrapper__input']}
             disabled={disabled}
             id={finalInputId}
             name={name}
             onChange={disabled ? undefined : onChange}
+            role={presentation ? 'presentation' : undefined}
             type={type}
             value={value}
           />
-          <span className={classes['template__input-wrapper__visible-box']}>
+          <span
+            className={classes['altinn-template__input-wrapper__visible-box']}
+          >
             {children}
           </span>
         </span>
       )}
       {(showLabel || description) && (
-        <span className={classes['template__label-and-description']}>
+        <span className={classes['altinn-template__label-and-description']}>
           {showLabel && (
             <span
-              className={classes['template__label-and-description__label']}
+              className={
+                classes['altinn-template__label-and-description__label']
+              }
               id={labelId}
             >
               {label}
@@ -97,7 +106,7 @@ export const CheckboxRadioTemplate = ({
           {description && (
             <span
               className={
-                classes['template__label-and-description__description']
+                classes['altinn-template__label-and-description__description']
               }
               id={descriptionId}
             >

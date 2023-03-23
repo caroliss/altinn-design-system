@@ -1,4 +1,4 @@
-import type { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, ReactNode } from 'react';
 import React from 'react';
 import cn from 'classnames';
 
@@ -17,18 +17,22 @@ export enum RadioButtonSize {
 export interface RadioButtonProps {
   checked?: boolean;
   className?: string;
-  description?: string;
+  description?: ReactNode;
   disabled?: boolean;
   error?: boolean;
   hideLabel?: boolean;
-  label?: string;
+  label?: ReactNode;
   name: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  presentation?: boolean;
   radioId?: string;
   size?: RadioButtonSize;
   value: string;
 }
 
+/**
+ * @deprecated Use RadioButton from @digdir/design-system-react instead.
+ */
 export const RadioButton = ({
   checked,
   description,
@@ -38,6 +42,7 @@ export const RadioButton = ({
   label,
   name,
   onChange,
+  presentation,
   radioId,
   size = RadioButtonSize.Small,
   value,
@@ -45,11 +50,11 @@ export const RadioButton = ({
   <CheckboxRadioTemplate
     checked={checked}
     className={cn(
-      classes.radio,
-      classes[`radio--${size}`],
-      checked && classes['radio--checked'],
-      error && classes['radio--error'],
-      disabled && classes['radio--disabled'],
+      classes['altinn-radio'],
+      classes[`altinn-radio--${size}`],
+      checked && classes['altinn-radio--checked'],
+      error && classes['altinn-radio--error'],
+      disabled && classes['altinn-radio--disabled'],
     )}
     description={description}
     disabled={disabled}
@@ -58,6 +63,7 @@ export const RadioButton = ({
     label={label}
     name={name}
     onChange={onChange}
+    presentation={presentation}
     size={
       size === RadioButtonSize.Xsmall
         ? CheckboxRadioTemplateSize.Xsmall
@@ -66,8 +72,8 @@ export const RadioButton = ({
     type='radio'
     value={value}
   >
-    <span className={classes['visible-button']}>
-      <span className={classes['visible-button__checkmark']} />
+    <span className={classes['altinn-visible-button']}>
+      <span className={classes['altinn-visible-button__checkmark']} />
     </span>
   </CheckboxRadioTemplate>
 );

@@ -1,4 +1,4 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
 
 import { RadioButton, RadioButtonSize } from '@/components/RadioButton';
@@ -26,18 +26,22 @@ export enum RadioGroupVariant {
 }
 
 export interface RadioGroupProps {
-  description?: string;
+  description?: ReactNode;
   disabled?: boolean;
-  error?: React.ReactNode;
+  error?: ReactNode;
   items: RadioItem[];
-  legend?: string;
+  legend?: ReactNode;
   name: string;
   onChange?: (value?: string) => void;
+  presentation?: boolean;
   size?: RadioGroupSize;
   value?: string;
   variant?: RadioGroupVariant;
 }
 
+/**
+ * @deprecated Use RadioGroup from @digdir/design-system-react instead.
+ */
 export const RadioGroup = ({
   description,
   disabled,
@@ -46,6 +50,7 @@ export const RadioGroup = ({
   legend,
   name,
   onChange,
+  presentation,
   size = RadioGroupSize.Small,
   value,
   variant = RadioGroupVariant.Vertical,
@@ -87,11 +92,11 @@ export const RadioGroup = ({
     >
       <div
         className={[
-          classes['radio-group'],
-          classes[`radio-group--${variant}`],
-          classes[`radio-group--${size}`],
+          classes['altinn-radio-group'],
+          classes[`altinn-radio-group--${variant}`],
+          classes[`altinn-radio-group--${size}`],
         ].join(' ')}
-        role='radiogroup'
+        role={presentation ? undefined : 'radiogroup'}
       >
         {items.map((radio) => (
           <RadioButton
@@ -102,6 +107,7 @@ export const RadioGroup = ({
             key={radio.value}
             name={name}
             onChange={changeHandler(radio.value)}
+            presentation={presentation}
             size={radioButtonSize}
           />
         ))}

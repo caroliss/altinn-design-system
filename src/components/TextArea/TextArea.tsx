@@ -14,6 +14,9 @@ export interface TextAreaProps
   resize?: 'none' | 'both' | 'horizontal' | 'vertical';
 }
 
+/**
+ * @deprecated Use TextArea from @digdir/design-system-react instead.
+ */
 export const TextArea = ({
   isValid = true,
   disabled = false,
@@ -38,8 +41,8 @@ export const TextArea = ({
             readOnly={Boolean(readOnly)}
             className={cn(
               className,
-              classes['TextArea'],
-              classes[`TextArea--resize-${resize}`],
+              classes['altinn-TextArea'],
+              classes[`altinn-TextArea--resize-${resize}`],
             )}
           />
         );

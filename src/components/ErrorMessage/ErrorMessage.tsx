@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 
 import classes from './ErrorMessage.module.css';
 
@@ -9,6 +8,9 @@ export interface ErrorMessageProps {
   ariaLabel?: string;
 }
 
+/**
+ * @deprecated Use ErrorMessage from @digdir/design-system-react instead.
+ */
 export const ErrorMessage = ({
   id,
   children,
@@ -20,7 +22,7 @@ export const ErrorMessage = ({
       aria-label={ariaLabel}
       id={id}
       role='alertdialog'
-      className={cn(classes['error-message-wrapper'])}
+      className={classes['altinn-error-message-wrapper']}
     >
       {children}
     </div>
